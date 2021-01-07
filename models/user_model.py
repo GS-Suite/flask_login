@@ -28,20 +28,22 @@ class User(db.Model):
             )
             db.session.add(new_user)
             db.session.commit()
-            print("created")
+            #print("created")
             return True
         except Exception as e:
-            print(e)
+            #print(e)
             return False
     
     def find_by_email(email):
-        email_count = User.query.filter_by(email = email).count()
-        return email_count
+        user = User.query.filter_by(email = email).first()
+        return user
     
     def get_username_count(username):
         count = User.query.filter_by(username = username).all()
         x = len(count)
-        print(x, count.count)
+        #print(x, count.count)
         return x
     
-    
+    def sign_in(email, password):
+        user = User.query.filter_by(email = email, password = password).first()
+        return user
