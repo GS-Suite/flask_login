@@ -13,3 +13,4 @@ DB = "db0o9o3gl2l3l0"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f"postgres://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DB}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config["TOKEN_VALIDITY_SECONDS"] = 500

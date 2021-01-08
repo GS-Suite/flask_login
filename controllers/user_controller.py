@@ -1,4 +1,6 @@
 from responses.standard_response_body import StandardResponseBody
+from responses.login_response_body import LoginResponseBody
+from controllers import token_controller
 from models.user_model import User
 from flask import jsonify
 import bcrypt
@@ -9,9 +11,14 @@ def hash_password(password):
     return hashed
 
 def check_password(password, hashed):
-    print(bcrypt.checkpw(password, hashed))
-    return True
+    return bcrypt.checkpw(password, hashed)
 
+def login(user, password):
+    if check_password(password.encode("utf-8"), user.password.encode("utf-8")):
+        return True
+    return False
+
+###
 
 def create_user(name, email, username, password):
     e = User.find_by_email(email)
@@ -31,8 +38,13 @@ def create_user(name, email, username, password):
 def sign_in(email, password):
     user = User.find_by_email(email)
     if user != None:
-        if check_password(password.encode("utf-8"), user.password.encode("utf-8")):
-            return jsonify(StandardResponseBody('Success', 'Successfully logged in').to_dict())
+        if login(user, password):
+            token_value = token_controller.get_token_by_user(user)
+            #print(token_value)
+            if token_value:
+                return jsonify(LoginResponseBody('Success', 'Successfully logged in', token_value).to_dict())
+            else:
+                return jsonify(StandardResponseBody('Error', 'Unable to generate token').to_dict())
         else:
             return jsonify(StandardResponseBody('Error', 'Invalid email or password').to_dict())
     return jsonify(StandardResponseBody('Error', 'Invalid email or password').to_dict())

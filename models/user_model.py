@@ -9,7 +9,8 @@ db = SQLAlchemy(app)
 class User(db.Model):
     __tablename__ = "gs_user"
 
-    email = db.Column(db.String(50), primary_key = True)
+    id = db.Column(db.Integer, primary_key = True)
+    email = db.Column(db.String(50))
     username = db.Column(db.String(50),nullable=False)
     password = db.Column(db.String(512),nullable = False)
     name = db.Column(db.String(50), nullable = False)
@@ -43,7 +44,3 @@ class User(db.Model):
         x = len(count)
         #print(x, count.count)
         return x
-    
-    def sign_in(email, password):
-        user = User.query.filter_by(email = email, password = password).first()
-        return user
