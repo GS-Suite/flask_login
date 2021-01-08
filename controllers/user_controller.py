@@ -15,7 +15,7 @@ def check_password(password, hashed):
 
 def create_user(name, email, username, password):
     e = User.find_by_email(email)
-    print(e)
+    #print(e)
     if e != None:
         return jsonify(StandardResponseBody('Error', 'Email already exists').to_dict())
 
