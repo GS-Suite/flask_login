@@ -5,7 +5,6 @@ from datetime import datetime
 
 db = SQLAlchemy(app)
 
-
 class User(db.Model):
     __tablename__ = "gs_user"
 
@@ -32,7 +31,7 @@ class User(db.Model):
             #print("created")
             return True
         except Exception as e:
-            #print(e)
+            print(e)
             return False
     
     def find_by_email(email):
@@ -42,5 +41,10 @@ class User(db.Model):
     def get_username_count(username):
         count = User.query.filter_by(username = username).all()
         x = len(count)
-        #print(x, count.count)
+        print(x, count.count)
         return x
+
+try:
+    db.create_all()
+except Exception as e:
+    print(e)

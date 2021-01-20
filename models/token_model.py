@@ -41,3 +41,9 @@ class Token(db.Model):
         except Exception as e:
             print(e)
             return False
+
+try:
+    db.create_all()
+except Exception as e:
+    print(e)
+    

@@ -5,11 +5,11 @@ from flask import Flask
 app = Flask(__name__)
 cors = CORS(app, allow_headers="token", expose_headers="token")
 
-USERNAME = "gdcrufqvtvrjrh"
-PASSWORD = "1a57336a9436b8167b1df846b8f9f576c1389eb17431d07d3caccda15fa196c4"
-HOST = "ec2-34-251-118-151.eu-west-1.compute.amazonaws.com"
+USERNAME = "fbowuamlkpivet"
+PASSWORD = "84b4f0be6d54abd24d3d67d2e39d9bd0407acb5b01f18771149a0eae4f6d09ed"
+HOST = "ec2-34-253-148-186.eu-west-1.compute.amazonaws.com"
 PORT = 5432
-DB = "db0o9o3gl2l3l0"
+DB = "d33p4j3lb9sb31"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f"postgres://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DB}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
